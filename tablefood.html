@@ -1,0 +1,95 @@
+<head>
+  <meta charset="utf-8">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+  <title>Foodora - Заказ еды для братанов из Flatora</title>
+</head>
+
+<body>
+  {{> header}}
+  <div class="container">
+    {{> bros}}
+  </div>
+</body>
+
+<template name="header">
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner-food"></div>
+    <div class="navbar-inner">
+      <div class="container">
+        <h1 class="brand">
+          <strong>Foodora</strong>
+          <small>Заказ еды для братанов из Flatora</small>
+        </h1>
+        <ul class="nav pull-right">
+          <li>
+            <a href="/" data-action="restart">Не вижу форму для ввода</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="bros">
+  {{#if bros.length}}
+    <table class="table" id="fd-bros">
+      <thead>
+        <tr>
+          <th width="15"></th>
+          <th width="20%">Братан</th>
+          <th width="*">Заказ</th>
+          <th width="10"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each bros}}
+          {{> bro}}
+        {{/each}}
+      </tbody>
+    </table>
+  {{else}}
+    <p class="nonexistent">Добавь себя пока других братанов нет!</p>
+  {{/if}}
+  {{> addForm}}
+</template>
+
+<template name="bro">
+  <tr{{#if controlled}} class="controlled"{{/if}}>
+    <td{{#if ordered}} class="ordered"{{/if}}>
+      <span class="tick">✔</span>
+    </td>
+    <td>
+      <span class="name">
+        {{name}}
+        {{#if typing}}<span class="typing">печатает&hellip;</span>{{/if}}
+      </span>
+    </td>
+    <td>
+      {{#if controlled}}
+        <input type="text" placeholder="Нет заказа" id="id-{{_id}}" value="{{meal}}" />
+      {{else}}
+        {{#if meal}}
+          {{meal}}
+        {{else}}
+          <span class="secondary">Нет заказа</span>
+        {{/if}}
+      {{/if}}
+    </td>
+    <td>
+      {{#if controlled}}
+        <span class="cross" title="Удалить себя">&times;</span>
+      {{/if}}
+    </td>
+  </tr>
+</template>
+
+<template name="addForm">
+  {{#if addable}}
+    <form class="form-inline" id="add-form">
+      <input type="text" class="input-large span3" id="new-name" placeholder="Твое братанское имя">
+      <button type="submit" class="btn btn-primary">
+        Добавить себя
+      </button>
+    </form>
+  {{/if}}
+</template>

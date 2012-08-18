@@ -9,6 +9,7 @@
   <div class="container">
     {{> bros}}
   </div>
+  {{> ordersLog}}
 </body>
 
 <template name="header">
@@ -22,7 +23,7 @@
         </h1>
         <ul class="nav pull-right">
           <li>
-            <a href="/" data-action="restart">Не вижу форму для ввода</a>
+            <a href="/" data-action="restart">Не вижу форму для ввода имени</a>
           </li>
         </ul>
       </div>
@@ -38,7 +39,6 @@
           <th width="15"></th>
           <th width="20%">Братан</th>
           <th width="*">Заказ</th>
-          <th width="10"></th>
         </tr>
       </thead>
       <tbody>
@@ -75,21 +75,52 @@
         {{/if}}
       {{/if}}
     </td>
-    <td>
-      {{#if controlled}}
-        <span class="cross" title="Удалить себя">&times;</span>
-      {{/if}}
-    </td>
   </tr>
 </template>
 
 <template name="addForm">
-  {{#if addable}}
-    <form class="form-inline" id="add-form">
-      <input type="text" class="input-large span3" id="new-name" placeholder="Твое братанское имя">
-      <button type="submit" class="btn btn-primary">
-        Добавить себя
-      </button>
-    </form>
-  {{/if}}
+  <div class="form-actions">
+    {{#if id}}
+      <div class="pull-right">
+        <button type="button" class="btn" data-toggle="modal" href="#orders-log">
+          История заказов
+        </button>
+        <button type="button" class="btn btn-danger" id="cross">Удалить себя</button>
+      </div>
+    {{else}}
+      <form class="form-inline" id="add-form">
+        <input type="text" class="input-large span3" id="new-name" placeholder="Твое братанское имя">
+        <button type="submit" class="btn btn-primary">
+          Добавить себя
+        </button>
+      </form>
+    {{/if}}
+  </div>
+</template>
+
+<template name="ordersLog">
+  <div class="modal fade hide" id="orders-log">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3>История заказов</h3>
+    </div>
+    {{#each bros}}
+      <div class="modal-body">
+        {{#if log.length}}
+          <table class="table table-condensed" id="orders-history">
+            <tbody>
+              {{#each log}}
+                <tr>
+                  <td>{{meal}}</td>
+                  <td class="timestamp">{{humanize date}} - {{date}}</td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        {{else}}
+          <p class="nonexistent">У вас истории пока нет.</p>
+        {{/if}}
+      </div>
+    {{/each}}
+  </div>
 </template>

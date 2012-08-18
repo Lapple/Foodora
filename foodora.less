@@ -117,8 +117,20 @@ body {
   }
 }
 
+.modal {
+  border-color: lighten( @gray, 15% );
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  background-color: lighten( @gray, 32% );
+  background-image: -webkit-linear-gradient( top, lighten( @gray, 32% ) 40%, lighten( @gray, 27% ) );
+  background-image: -moz-linear-gradient( top, lighten( @gray, 32% ) 40%, lighten( @gray, 27% ) );
+  border-bottom: 1px solid lighten( @gray, 20% );
+}
+
 .modal-backdrop {
-  background: url( "food.jpg" );
+  background: @white;
 }
 
 @-webkit-keyframes passby {

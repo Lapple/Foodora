@@ -85,13 +85,15 @@ do ->
   Template.ordersLog.humanize = ( date ) ->
     moment( date, dateFormat ).fromNow()
 
-  Template.ordersLog.log = ->
-    bro = Bros.find( Session.get 'id' ).fetch()[ 0 ]
+  Template.ordersLog.orders = ->
+    id   = Session.get 'id'
+    logs = []
 
-    bro.log.sort ( a, b ) ->
-      moment( b.date, dateFormat ).unix() - moment( a.date, dateFormat ).unix()
+    Bros.find( id ).forEach ( bro ) ->
+      logs = bro.log?.sort ( a, b ) ->
+        moment( b.date, dateFormat ).unix() - moment( a.date, dateFormat ).unix()
 
-    return bro.log
+    return logs
 
   Meteor.startup ->
     # Setting current id

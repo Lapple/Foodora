@@ -37,7 +37,9 @@
       <thead>
         <tr>
           <th width="15"></th>
-          <th width="20%">Братан</th>
+          <th width="20%">
+            Братан
+          </th>
           <th width="*">Заказ</th>
         </tr>
       </thead>
@@ -56,7 +58,9 @@
 <template name="bro">
   <tr{{#if controlled}} class="controlled"{{/if}}>
     <td{{#if ordered}} class="ordered"{{/if}}>
-      <span class="tick">✔</span>
+      <span class="tick">
+        <i class="icon icon-ok icon-white"></i>
+      </span>
     </td>
     <td>
       <span class="name">
@@ -66,7 +70,7 @@
     </td>
     <td>
       {{#if controlled}}
-        <input type="text" placeholder="Нет заказа" id="id-{{_id}}" value="{{meal}}" />
+        <input type="search" placeholder="Нет заказа" id="id-{{_id}}" value="{{meal}}" />
       {{else}}
         {{#if meal}}
           {{meal}}
@@ -83,14 +87,19 @@
     {{#if id}}
       <div class="pull-right">
         <button type="button" class="btn" data-toggle="modal" href="#orders-log">
+          <i class="icon icon-th-list"></i>
           История заказов
         </button>
-        <button type="button" class="btn btn-danger" id="cross">Удалить себя</button>
+        <button type="button" class="btn btn-danger" id="cross">
+          <i class="icon icon-trash icon-white"></i>
+          Удалить себя
+        </button>
       </div>
     {{else}}
       <form class="form-inline" id="add-form">
         <input type="text" class="input-large span3" id="new-name" placeholder="Твое братанское имя">
         <button type="submit" class="btn btn-primary">
+          <i class="icon icon-plus icon-white"></i>
           Добавить себя
         </button>
       </form>
@@ -105,13 +114,16 @@
       <h3>История заказов</h3>
     </div>
     <div class="modal-body">
-      {{#if log.length}}
+      {{#if orders.length}}
         <table class="table table-condensed" id="orders-history">
           <tbody>
-            {{#each log}}
+            {{#each orders}}
               <tr>
                 <td>{{meal}}</td>
-                <td class="timestamp">{{humanize date}} - {{date}}</td>
+                <td class="timestamp">
+                  {{humanize date}},
+                  {{date}}
+                </td>
               </tr>
             {{/each}}
           </tbody>

@@ -1,4 +1,6 @@
 do ->
+  dateFormat = 'DD.MM.YYYY'
+
   $el = ( id ) ->
     document.getElementById id
 
@@ -81,13 +83,15 @@ do ->
       removeBro Session.get 'id'
 
   Template.ordersLog.humanize = ( date ) ->
-    moment( date, 'DD.MM.YYYY' ).fromNow()
+    moment( date, dateFormat ).fromNow()
 
-  Template.ordersLog.bros = ->
-    Bros.find Session.get( 'id' ),
-      sort:
-        date: -1
-    .fetch()
+  Template.ordersLog.log = ->
+    bro = Bros.find( Session.get 'id' ).fetch()[ 0 ]
+
+    bro.log.sort ( a, b ) ->
+      moment( b.date, dateFormat ).unix() - moment( a.date, dateFormat ).unix()
+
+    return bro.log
 
   Meteor.startup ->
     # Setting current id

@@ -104,23 +104,21 @@
       <button type="button" class="close" data-dismiss="modal">×</button>
       <h3>История заказов</h3>
     </div>
-    {{#each bros}}
-      <div class="modal-body">
-        {{#if log.length}}
-          <table class="table table-condensed" id="orders-history">
-            <tbody>
-              {{#each log}}
-                <tr>
-                  <td>{{meal}}</td>
-                  <td class="timestamp">{{humanize date}} - {{date}}</td>
-                </tr>
-              {{/each}}
-            </tbody>
-          </table>
-        {{else}}
-          <p class="nonexistent">У вас истории пока нет.</p>
-        {{/if}}
-      </div>
-    {{/each}}
+    <div class="modal-body">
+      {{#if log.length}}
+        <table class="table table-condensed" id="orders-history">
+          <tbody>
+            {{#each log}}
+              <tr>
+                <td>{{meal}}</td>
+                <td class="timestamp">{{humanize date}} - {{date}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      {{else}}
+        <p class="nonexistent">У вас истории пока нет.</p>
+      {{/if}}
+    </div>
   </div>
 </template>

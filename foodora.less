@@ -16,19 +16,6 @@ body {
   }
 }
 
-.navbar-inner-food {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-image: url( "food.jpg" );
-  background-repeat: repeat;
-  -webkit-animation: passby 30s infinite linear;
-  -moz-animation: passby 30s infinite linear;
-  opacity: 0.2;
-}
-
 .nonexistent {
   padding: 3em 0;
   text-align: center;
@@ -155,7 +142,26 @@ body {
   body {
     padding-top: 0;
   }
-  .navbar-inner-food {
-    display: none;
+  #fd-bros {
+    td {
+      .name {
+        width: 250px;
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  #fd-bros {
+    td {
+      .name {
+        width: 180px;
+      }
+    }
+  }
+  h1 {
+    small {
+      display: none;
+    }
   }
 }

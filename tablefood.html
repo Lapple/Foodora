@@ -10,11 +10,11 @@
     {{> bros}}
   </div>
   {{> ordersLog}}
+  {{> removeModal}}
 </body>
 
 <template name="header">
   <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner-food"></div>
     <div class="navbar-inner">
       <div class="container">
         <h1 class="brand">
@@ -23,7 +23,9 @@
         </h1>
         <ul class="nav pull-right">
           <li>
-            <a href="/" data-action="restart">Не вижу форму для ввода имени</a>
+            <a href="/" data-action="restart">
+              Не вижу форму для ввода имени
+            </a>
           </li>
         </ul>
       </div>
@@ -90,7 +92,7 @@
           <i class="icon icon-th-list"></i>
           История заказов
         </button>
-        <button type="button" class="btn btn-danger" id="cross">
+        <button type="button" class="btn btn-danger" href="#remove-modal" data-toggle="modal">
           <i class="icon icon-trash icon-white"></i>
           Удалить себя
         </button>
@@ -131,6 +133,29 @@
       {{else}}
         <p class="nonexistent">У вас истории пока нет.</p>
       {{/if}}
+    </div>
+  </div>
+</template>
+
+<template name="removeModal">
+  <div class="modal hide" id="remove-modal">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3>Удаление братана</h3>
+    </div>
+    <div class="modal-body">
+      <div class="alert alert-danger">Это действие невозможно обратить, вы разом удалите всю историю своих заказов и не оставите даже самого малейшего упоминания о своем участии в&nbsp;благородных заказах пищи.</div>
+      <p>Вы все еще хотите удалить себя из списка?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" data-dismiss="modal">
+        <i class="icon icon-random"></i>
+        Нет, я хотел нажать на «История заказов»
+      </button>
+      <button type="button" class="btn btn-danger" id="cross" data-dismiss="modal">
+        <i class="icon icon-trash icon-white"></i>
+        Да, хочу
+      </button>
     </div>
   </div>
 </template>

@@ -79,6 +79,7 @@ do ->
 
       return false
 
+  Template.removeModal.events =
     'click #cross': ->
       removeBro Session.get 'id'
 

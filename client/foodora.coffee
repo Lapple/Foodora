@@ -45,6 +45,12 @@ do ->
     removeBro Session.get 'id'
     return false
 
+  Template.app.isHomePage = ->
+    Session.equals 'currentPage', 'home'
+
+  Template.app.isMenuPage = ->
+    Session.equals 'currentPage', 'menu'
+
   Template.bros.bros = ->
     Bros.find( {}, { sort: { ordered: -1, name: 1 } } ).fetch()
 
@@ -96,8 +102,26 @@ do ->
 
     return logs
 
+  # Routing
+  Router = Backbone.Router.extend
+    routes:
+      ''     : 'home'
+      'menu' : 'menu'
+
+    home: ->
+      Session.set 'currentPage', 'home'
+
+    menu: ->
+      Session.set 'currentPage', 'menu'
+
+  app = new Router
+
   Meteor.startup ->
     # Setting current id
     id = localStorage.getItem 'ids'
     Session.set 'id', id if id
+
+    Backbone.history.start( pushState: true )
+
+
 

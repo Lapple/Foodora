@@ -6,12 +6,23 @@
 
 <body>
   {{> header}}
-  <div class="container">
-    {{> bros}}
-  </div>
-  {{> ordersLog}}
-  {{> removeModal}}
+  {{> app}}
 </body>
+
+<template name="app">
+  {{#if isHomePage}}
+    <div class="container">
+      {{> bros}}
+    </div>
+    {{> ordersLog}}
+    {{> removeModal}}
+  {{/if}}
+  {{#if isMenuPage}}
+    <div class="container">
+      Menu page
+    </div>
+  {{/if}}
+</template>
 
 <template name="header">
   <div class="navbar navbar-fixed-top">

@@ -7,3 +7,4 @@ bootstrap
 coffeescript
 less
 autopublish
+backbone

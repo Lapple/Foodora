@@ -1,4 +1,5 @@
 Bros = new Meteor.Collection 'bros'
+Menu = new Meteor.Collection 'menu'
 
 getToday = ->
   moment().format 'DD.MM.YYYY'

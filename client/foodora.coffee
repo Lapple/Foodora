@@ -52,7 +52,9 @@ do ->
     Session.equals 'currentPage', 'menu'
 
   Template.bros.bros = ->
-    Bros.find( {}, { sort: { ordered: -1, name: 1 } } ).fetch()
+    Bros.find( Session.get 'id' ).fetch().concat(
+      Bros.find( { _id: { $ne: Session.get 'id' } }, { sort: { ordered: -1, name: 1 } } ).fetch()
+    )
 
   Template.bro.controlled = ->
     Session.get( 'id' ) is @_id

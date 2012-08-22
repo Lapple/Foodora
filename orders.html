@@ -39,7 +39,7 @@
     <td>
       {{#if controlled}}
         <form action="#" method="post">
-          <input type="search" placeholder="Нет заказа" id="id-{{_id}}" value="{{meal}}" data-provide="typeahead" data-source='[{{meals}}]' />
+          <input type="search" placeholder="Нет заказа" id="id-{{_id}}" value="{{meal}}" data-provide="typeahead" data-source='[{{meals}}]' data-mode="multiple" />
         </form>
       {{else}}
         {{#if meal}}

@@ -45,6 +45,11 @@ do ->
     removeBro Session.get 'id'
     return false
 
+  formatOrder = ( order ) ->
+    return order if order.length is 0
+
+    order[ 0 ] + order.substr( 1 ).toLowerCase().replace /^(.*),\s*$/g, '$1'
+
   Template.app.isHomePage = ->
     Session.equals 'currentPage', 'home'
 
@@ -81,7 +86,9 @@ do ->
       # the input after Bootstrap's Typeahead plugin
       # changes value on click
       Meteor.setTimeout ->
-        setOrder e.target.value
+        order = formatOrder e.target.value
+        setOrder order
+        e.target.value = order
       , 100
 
   Template.header.events =

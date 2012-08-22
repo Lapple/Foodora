@@ -48,7 +48,7 @@ do ->
   formatOrder = ( order ) ->
     return order if order.length is 0
 
-    order[ 0 ] + order.substr( 1 ).toLowerCase().replace /^(.*),\s*$/g, '$1'
+    order.replace /^(.*),\s*$/g, '$1'
 
   Template.app.isHomePage = ->
     Session.equals 'currentPage', 'home'
@@ -69,7 +69,7 @@ do ->
 
   Template.bro.meals = ->
     Menu.find().map ( meal ) ->
-      "\"#{ meal.title }\""
+      "\"#{ meal.title.toLowerCase() }\""
     .join ','
 
   Template.bro.events =

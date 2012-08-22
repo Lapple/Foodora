@@ -57,18 +57,26 @@ do ->
   Template.bro.controlled = ->
     Session.get( 'id' ) is @_id
 
+  Template.bro.meals = ->
+    Menu.find().map ( meal ) ->
+      "\"#{ meal.title }\""
+    .join ','
+
   Template.bro.events =
-    'keydown input': ( e ) ->
-      # Enter key
-      if e.keyCode is 13
-        e.target.blur()
+    'keyup input': ( e ) ->
+      setOrder e.target.value
 
     'focus input': ->
       setTyping true
 
     'blur input': ( e ) ->
-      setOrder e.target.value
       setTyping false
+      # A small hack used to get the updated value of
+      # the input after Bootstrap's Typeahead plugin
+      # changes value on click
+      Meteor.setTimeout ->
+        setOrder e.target.value
+      , 100
 
   Template.header.events =
     'click [data-action=restart]': restoreAddability

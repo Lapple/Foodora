@@ -38,10 +38,10 @@
     </td>
     <td>
       {{#if controlled}}
-        <input type="search" placeholder="Нет заказа" id="id-{{_id}}" value="{{meal}}" />
+        <input type="search" placeholder="Нет заказа" id="id-{{_id}}" value="{{meal}}" data-provide="typeahead" data-source='[{{meals}}]' />
       {{else}}
         {{#if meal}}
-          {{meal}}
+          {{meal}}{{#if typing}}<span class="secondary">…</span>{{/if}}
         {{else}}
           <span class="secondary">Нет заказа</span>
         {{/if}}

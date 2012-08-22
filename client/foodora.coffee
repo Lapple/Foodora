@@ -4,8 +4,8 @@ do ->
   $el = ( id ) ->
     document.getElementById id
 
-  setOrder = ( id, meal ) ->
-    Bros.update { _id: id }, {
+  setOrder = ( meal ) ->
+    Bros.update { _id: Session.get( 'id' ) }, {
       $set: {
         ordered : meal.length > 0
         meal    : meal
@@ -34,8 +34,8 @@ do ->
     localStorage.setItem 'ids', id
     Session.set 'id', id
 
-  setTyping = ( id, typing ) ->
-    Bros.update { _id: id }, {
+  setTyping = ( typing ) ->
+    Bros.update { _id: Session.get( 'id' ) }, {
       $set: {
         typing: typing
       }
@@ -64,11 +64,11 @@ do ->
         e.target.blur()
 
     'focus input': ->
-      setTyping @_id, true
+      setTyping true
 
     'blur input': ( e ) ->
-      setOrder @_id, e.target.value
-      setTyping @_id, false
+      setOrder e.target.value
+      setTyping false
 
   Template.header.events =
     'click [data-action=restart]': restoreAddability
@@ -101,6 +101,11 @@ do ->
         moment( b.date, dateFormat ).unix() - moment( a.date, dateFormat ).unix()
 
     return logs
+
+  Template.ordersLog.events =
+    'click tr': ->
+      $el( "id-#{ Session.get 'id' }" ).value = @meal
+      setOrder @meal
 
   # Routing
   Router = Backbone.Router.extend

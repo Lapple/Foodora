@@ -25,7 +25,7 @@
 
 <template name="bro">
   <tr{{#if controlled}} class="controlled"{{/if}}>
-    <td{{#if hasOrdered}} class="ordered"{{/if}}>
+    <td{{#if ordered}} class="ordered"{{/if}}>
       <span class="tick">
         <i class="icon icon-ok icon-white"></i>
       </span>
@@ -38,10 +38,12 @@
     </td>
     <td>
       {{#if controlled}}
-        <input type="search" placeholder="Нет заказа" id="id-{{_id}}" value="{{meal}}" data-provide="typeahead" data-source='[{{meals}}]' />
+        <form action="#" method="post">
+          <input type="search" placeholder="Нет заказа" id="id-{{_id}}" value="{{meal}}" data-provide="typeahead" data-source='[{{meals}}]' />
+        </form>
       {{else}}
         {{#if meal}}
-          {{meal}}{{#if typing}}<span class="secondary">…</span>{{/if}}
+          {{meal}}
         {{else}}
           <span class="secondary">Нет заказа</span>
         {{/if}}

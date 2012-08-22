@@ -59,9 +59,6 @@ do ->
   Template.bros.user = ->
     Session.get 'id'
 
-  Template.bro.hasOrdered = ->
-    @ordered and !@typing
-
   Template.bro.controlled = ->
     Session.get( 'id' ) is @_id
 
@@ -71,8 +68,9 @@ do ->
     .join ','
 
   Template.bro.events =
-    'keyup input': ( e ) ->
-      setOrder e.target.value
+    'submit form': ( e ) ->
+      $el( "id-#{ @_id }" ).blur()
+      return false
 
     'focus input': ->
       setTyping true

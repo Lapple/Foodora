@@ -56,6 +56,9 @@ do ->
       Bros.find( { _id: { $ne: Session.get 'id' } }, { sort: { ordered: -1, name: 1 } } ).fetch()
     )
 
+  Template.bros.user = ->
+    Session.get 'id'
+
   Template.bro.hasOrdered = ->
     @ordered and !@typing
 

@@ -1,0 +1,30 @@
+<template name="addMenu">
+  <div class="form-actions">
+    <form class="form-inline" id="add-meal">
+      <input type="text" class="input-large span6" id="meal-name" placeholder="Название блюда">
+      <button type="submit" class="btn btn-primary">
+        <i class="icon icon-plus icon-white"></i>
+        Добавить
+      </button>
+    </form>
+  </div>
+</template>
+
+<template name="meals">
+  {{#if meals.length}}
+    <table id="meals-list" class="table table-condensed">
+      <tbody>
+        {{#each meals}}
+          <tr>
+            <td>{{title}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    </ul>
+  {{else}}
+    <p class="nonexistent">
+      Ни одного блюда пока не добавлено.
+    </p>
+  {{/if}}
+</template>

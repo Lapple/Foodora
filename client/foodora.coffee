@@ -1,8 +1,8 @@
+$el = ( id ) ->
+  document.getElementById id
+
 do ->
   dateFormat = 'DD.MM.YYYY'
-
-  $el = ( id ) ->
-    document.getElementById id
 
   setOrder = ( meal ) ->
     Bros.update { _id: Session.get( 'id' ) }, {

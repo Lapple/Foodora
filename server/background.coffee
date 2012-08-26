@@ -21,4 +21,6 @@ logOrders = ->
 Meteor.startup ->
   # Logging previous entries every single day
   Cron.instance.addJob 60, ->
-    logOrders() if moment().hours() is 0
+    if moment().hours() is 0
+      logOrders()
+      console.log "Logged yesterday orders at #{ moment().format 'DD.MM.YYYY HH:mm' }"

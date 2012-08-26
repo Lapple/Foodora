@@ -12,6 +12,15 @@
       {{> addMenu}}
     </div>
   {{/if}}
+  {{#if isNotFound}}
+    <div class="container">
+      <p class="nonexistent">
+        Страница не найдена.
+        Вернитесь к
+        <a href="/">списку заказов</a>.
+      </p>
+    </div>
+  {{/if}}
 </template>
 
 <template name="header">

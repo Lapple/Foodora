@@ -1,9 +1,9 @@
+Meteor.subscribe 'bros'
+
 $el = ( id ) ->
   document.getElementById id
 
 do ->
-  dateFormat = 'DD.MM.YYYY'
-
   setOrder = ( meal ) ->
     Bros.update { _id: Session.get( 'id' ) }, {
       $set: {
@@ -47,8 +47,7 @@ do ->
 
   formatOrder = ( order ) ->
     return order if order.length is 0
-
-    order.replace /^(.*),\s*$/g, '$1'
+    return order.replace /^(.*),\s*$/g, '$1'
 
   Template.app.isHomePage = ->
     Session.equals 'currentPage', 'home'
@@ -56,9 +55,15 @@ do ->
   Template.app.isMenuPage = ->
     Session.equals 'currentPage', 'menu'
 
+  Template.app.isNotFound = ->
+    Session.equals 'currentPage', '404'
+
   Template.bros.bros = ->
     Bros.find( Session.get 'id' ).fetch().concat(
-      Bros.find( { _id: { $ne: Session.get 'id' } }, { sort: { ordered: -1, name: 1 } } ).fetch()
+      Bros.find(
+        { _id: { $ne: Session.get 'id' } },
+        { sort: { ordered: -1, name: 1 } }
+      ).fetch()
     )
 
   Template.bros.user = ->
@@ -133,12 +138,16 @@ do ->
     routes:
       ''     : 'home'
       'menu' : 'menu'
+      '*404' : 'notFound'
 
     home: ->
       Session.set 'currentPage', 'home'
 
     menu: ->
       Session.set 'currentPage', 'menu'
+
+    notFound: ->
+      Session.set 'currentPage', '404'
 
   app = new Router
 
@@ -148,6 +157,3 @@ do ->
     Session.set 'id', id if id
 
     Backbone.history.start( pushState: true )
-
-
-

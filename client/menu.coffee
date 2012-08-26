@@ -1,3 +1,5 @@
+Meteor.subscribe 'menu'
+
 do ->
   addMeal = ( title ) ->
     return if title.length is 0

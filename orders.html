@@ -1,4 +1,3 @@
-
 <template name="bros">
   {{#if bros.length}}
     <table class="table{{#if user}} user{{/if}}" id="fd-bros">
@@ -39,7 +38,7 @@
     <td>
       {{#if controlled}}
         <form action="#" method="post">
-          <input type="search" placeholder="Нет заказа" id="id-{{_id}}" value="{{meal}}" data-provide="typeahead" data-source='[{{meals}}]' data-mode="multiple" />
+          <input type="search" placeholder="Нет заказа" id="my-order" value="{{meal}}" data-provide="typeahead" data-source='[{{meals}}]' data-mode="multiple" />
         </form>
       {{else}}
         {{#if meal}}

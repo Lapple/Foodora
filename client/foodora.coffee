@@ -10,6 +10,7 @@ do ->
         ordered : meal.length > 0
         meal    : meal
         last    : getToday()
+        typing  : false
       }
     }
 
@@ -35,7 +36,7 @@ do ->
     Session.set 'id', id
 
   setTyping = ( typing ) ->
-    Bros.update { _id: Session.get( 'id' ) }, {
+    Bros.update Session.get( 'id' ), {
       $set: {
         typing: typing
       }
@@ -77,9 +78,9 @@ do ->
       "\"#{ meal.title.toLowerCase() }\""
     .join ','
 
-  Template.bro.events =
-    'submit form': ( e ) ->
-      $el( "id-#{ @_id }" ).blur()
+  Template.bro.events
+    'submit form': ( e, template ) ->
+      template.find( 'input' ).blur()
       return false
 
     'focus input': ->
@@ -96,13 +97,17 @@ do ->
         e.target.value = order
       , 100
 
-  Template.header.events =
+  Template.bro.preserve
+    'input[id]': (node) ->
+      node.id
+
+  Template.header.events
     'click [data-action=restart]': restoreAddability
 
   Template.addForm.id = ->
     Session.get 'id'
 
-  Template.addForm.events =
+  Template.addForm.events
     'submit form': ->
       input = $el( 'new-name' )
 
@@ -111,7 +116,7 @@ do ->
 
       return false
 
-  Template.removeModal.events =
+  Template.removeModal.events
     'click #cross': ->
       removeBro Session.get 'id'
 
@@ -128,9 +133,9 @@ do ->
 
     return logs
 
-  Template.ordersLog.events =
+  Template.ordersLog.events
     'click tr': ->
-      $el( "id-#{ Session.get 'id' }" ).value = @meal
+      $el( 'my-order' ).value = @meal
       setOrder @meal
 
   # Routing

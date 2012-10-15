@@ -4,10 +4,28 @@
 @black : #000;
 @gray  : #aaa;
 @green : #090;
+@red   : #bc4545;
 
 body {
   padding-top: 50px;
   font-family: 'Open Sans', sans-serif;
+}
+
+.navbar {
+  .brand {
+    font-family: 'Krona One', sans-serif;
+    color: lighten( @gray, 15% );
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: default;
+    -webkit-transition: 0.2s;
+    -moz-transition: 0.2s;
+    -o-transition: 0.2s;
+    transition: 0.2s;
+    &:hover {
+      color: @red;
+    }
+  }
 }
 
 .nonexistent {

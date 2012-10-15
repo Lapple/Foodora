@@ -50,6 +50,7 @@ do ->
     return order if order.length is 0
     return order.replace /^(.*),\s*$/g, '$1'
 
+  # Basic routing
   Template.app.isHomePage = ->
     Session.equals 'currentPage', 'home'
 
@@ -59,14 +60,16 @@ do ->
   Template.app.isNotFound = ->
     Session.equals 'currentPage', '404'
 
+  # List of bros available
   Template.bros.bros = ->
-    Bros.find( Session.get 'id' ).fetch().concat(
-      Bros.find(
-        { _id: { $ne: Session.get 'id' } },
-        { sort: { ordered: -1, name: 1 } }
-      ).fetch()
-    )
+      Bros.find( Session.get 'id' ).fetch().concat(
+        Bros.find(
+          { _id: { $ne: Session.get 'id' } },
+          { sort: { ordered: -1, name: 1 } }
+        ).fetch()
+      )
 
+  # Current user ID
   Template.bros.user = ->
     Session.get 'id'
 
@@ -104,9 +107,6 @@ do ->
   Template.header.events
     'click [data-action=restart]': restoreAddability
 
-  Template.addForm.id = ->
-    Session.get 'id'
-
   Template.addForm.events
     'submit form': ->
       input = $el( 'new-name' )
@@ -115,6 +115,9 @@ do ->
       input.value = ''
 
       return false
+
+  Template.addForm.id = ->
+    Session.get 'id'
 
   Template.removeModal.events
     'click #cross': ->

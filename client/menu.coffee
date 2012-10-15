@@ -9,7 +9,7 @@ do ->
       updated : getToday()
 
   Template.meals.meals = ->
-    Menu.find( {}, { sort: { title: 1 } } ).fetch()
+      Menu.find( {}, { sort: { title: 1 } } ).fetch()
 
   Template.addMenu.events
     'submit #add-meal': ->

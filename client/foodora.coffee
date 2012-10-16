@@ -46,7 +46,8 @@ do ->
   toggleEating = ( missing ) ->
     Bros.update Session.get( 'id' ), {
       $set: {
-        missingFood: missing
+        missingFood : missing
+        last        : getToday()
       }
     }
 

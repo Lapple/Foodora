@@ -1,10 +1,10 @@
 @lineHeight: 30px;
 
-@white : #fff;
-@black : #000;
-@gray  : #aaa;
-@green : #090;
-@red   : #bc4545;
+@white  : #fff;
+@black  : #000;
+@gray   : #aaa;
+@green  : #090;
+@yellow : #ffc40d;
 
 body {
   padding-top: 50px;
@@ -23,7 +23,7 @@ body {
     -o-transition: 0.2s;
     transition: 0.2s;
     &:hover {
-      color: @red;
+      color: @green;
     }
   }
 }
@@ -34,15 +34,27 @@ body {
   color: darken( @white, 40% );
 }
 
-.tick {
-  color: @green;
+.tick, .pause {
   display: none;
+  position: relative;
 }
 
 .ordered {
   background: @green !important;
   .tick {
     display: inline;
+    top: 1px;
+  }
+}
+
+.missing {
+  background: @yellow !important;
+  .pause {
+    display: block;
+    top: 2px;
+  }
+  .tick {
+    display: none;
   }
 }
 
@@ -78,19 +90,25 @@ body {
       }
     }
   }
-  tr:hover {
-    td {
-      background: none;
+  tr {
+    &:hover {
+      td {
+        background: none;
+      }
     }
   }
   form {
     margin: 0;
   }
+  .row {
+    margin-left: 0;
+    margin-top: -1px;
+    vertical-align: bottom;
+  }
   input {
     width: 100%;
-    display: block;
-    box-sizing: padding-box;
-    margin: 0 -4px;
+    display: inline-block;
+    margin: 0;
     height: @lineHeight;
     border: none;
     box-shadow: none;
@@ -102,7 +120,21 @@ body {
     &:focus {
       background: rgba( 0, 0, 0, 0.06 );
     }
+    &:disabled {
+      background: rgba( 0, 0, 0, 0.02 );
+      color: @gray;
+    }
   }
+}
+
+#no-food {
+  display: inline-block;
+  border-radius: 0;
+  border-top: none;
+  border-bottom: none;
+  height: 30px;
+  position: relative;
+  right: -8px;
 }
 
 #add-form, #add-meal {

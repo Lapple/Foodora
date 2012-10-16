@@ -24,9 +24,12 @@
 
 <template name="bro">
   <tr{{#if controlled}} class="controlled"{{/if}}>
-    <td{{#if ordered}} class="ordered"{{/if}}>
+    <td class="{{#if missingFood}} missing{{/if}}{{#if ordered}} ordered{{/if}}">
       <span class="tick">
         <i class="icon icon-ok icon-white"></i>
+      </span>
+      <span class="pause">
+        <i class="icon icon-ban-circle icon-white"></i>
       </span>
     </td>
     <td>
@@ -38,13 +41,24 @@
     <td>
       {{#if controlled}}
         <form action="#" method="post">
-          <input type="search" placeholder="Нет заказа" id="my-order" value="{{meal}}" data-provide="typeahead" data-source='[{{meals}}]' data-mode="multiple" />
+          <div class="row">
+            <div class="span10">
+              <input type="search" placeholder="Нет заказа" id="my-order" value="{{meal}}" data-provide="typeahead" data-source='[{{meals}}]' data-mode="multiple" class="span10" {{#if missingFood}} disabled{{/if}} />
+            </div>
+            <div class="span2">
+              <button class="btn btn-block{{#if missingFood}} active{{/if}}" id="no-food" data-toggle="button" type="button">Не обедаю</button>
+            </div>
+          </div>
         </form>
       {{else}}
-        {{#if meal}}
-          {{meal}}
+        {{#if missingFood}}
+          <span class="secondary">Сегодня без обеда</span>
         {{else}}
-          <span class="secondary">Нет заказа</span>
+          {{#if meal}}
+            {{meal}}
+          {{else}}
+            <span class="secondary">Нет заказа</span>
+          {{/if}}
         {{/if}}
       {{/if}}
     </td>

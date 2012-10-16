@@ -9,8 +9,9 @@ logOrder = ( bro ) ->
 
   Bros.update( bro._id,
     $unset:
-      meal: 1
-      ordered: 1
+      meal        : 1
+      ordered     : 1
+      missingFood : 1
   )
 
 logOrders = ->

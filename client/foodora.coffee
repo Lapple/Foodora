@@ -23,11 +23,12 @@ do ->
     return if name.length is 0
 
     id = Bros.insert
-      name    : name
-      ordered : false
-      typing  : false
-      log     : []
-      last    : getToday()
+      name        : name
+      ordered     : false
+      typing      : false
+      missingFood : false
+      log         : []
+      last        : getToday()
 
     setControlledID id
 
@@ -39,6 +40,13 @@ do ->
     Bros.update Session.get( 'id' ), {
       $set: {
         typing: typing
+      }
+    }
+
+  toggleEating = ( missing ) ->
+    Bros.update Session.get( 'id' ), {
+      $set: {
+        missingFood: missing
       }
     }
 
@@ -65,7 +73,7 @@ do ->
       Bros.find( Session.get 'id' ).fetch().concat(
         Bros.find(
           { _id: { $ne: Session.get 'id' } },
-          { sort: { ordered: -1, name: 1 } }
+          { sort: { ordered: -1, missingFood: 1, name: 1 } }
         ).fetch()
       )
 
@@ -99,6 +107,11 @@ do ->
         setOrder order
         e.target.value = order
       , 100
+
+    'click #no-food': ->
+      Meteor.setTimeout ->
+        toggleEating $( '#no-food' ).hasClass 'active'
+      , 0
 
   Template.bro.preserve
     'input[id]': (node) ->

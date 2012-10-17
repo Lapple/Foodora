@@ -68,11 +68,11 @@
 <template name="addForm">
   <div class="form-actions">
     {{#if id}}
+      <button type="button" class="btn" data-toggle="modal" href="#orders-log">
+        <i class="icon icon-th-list"></i>
+        История заказов
+      </button>
       <div class="pull-right">
-        <button type="button" class="btn" data-toggle="modal" href="#orders-log">
-          <i class="icon icon-th-list"></i>
-          История заказов
-        </button>
         <button type="button" class="btn btn-danger" href="#remove-modal" data-toggle="modal">
           <i class="icon icon-trash icon-white"></i>
           Удалить себя

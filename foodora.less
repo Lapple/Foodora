@@ -50,8 +50,9 @@ body {
 .missing {
   background: @yellow !important;
   .pause {
-    display: block;
+    display: inline;
     top: 2px;
+    left: 1px;
   }
   .tick {
     display: none;
@@ -102,12 +103,13 @@ body {
   }
   .row {
     margin-left: 0;
-    margin-top: -1px;
-    vertical-align: bottom;
+    & > div {
+      vertical-align: top;
+    }
   }
   input {
     width: 100%;
-    display: inline-block;
+    display: block;
     margin: 0;
     height: @lineHeight;
     border: none;
@@ -128,7 +130,6 @@ body {
 }
 
 #no-food {
-  display: inline-block;
   border-radius: 0;
   border-top: none;
   border-bottom: none;

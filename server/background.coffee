@@ -19,6 +19,9 @@ logOrders = ->
     last: { $ne: getToday() }
   .forEach logOrder
 
+Meteor.methods
+  cleanUp: logOrders
+
 Meteor.startup ->
   # Logging previous entries every single day
   Cron.instance.addJob 60, logOrders

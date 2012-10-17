@@ -8,7 +8,8 @@ do ->
       title   : title
       updated : getToday()
 
-  Template.meals.meals = ->
+  Template.meals.helpers
+    meals: ->
       Menu.find( {}, { sort: { title: 1 } } ).fetch()
 
   Template.addMenu.events

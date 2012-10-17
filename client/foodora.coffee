@@ -60,17 +60,19 @@ do ->
     return order.replace /^(.*),\s*$/g, '$1'
 
   # Basic routing
-  Template.app.isHomePage = ->
-    Session.equals 'currentPage', 'home'
+  Template.app.helpers
+    isHomePage: ->
+      Session.equals 'currentPage', 'home'
 
-  Template.app.isMenuPage = ->
-    Session.equals 'currentPage', 'menu'
+    isMenuPage: ->
+      Session.equals 'currentPage', 'menu'
 
-  Template.app.isNotFound = ->
-    Session.equals 'currentPage', '404'
+    isNotFound: ->
+      Session.equals 'currentPage', '404'
 
-  # List of bros available
-  Template.bros.bros = ->
+  Template.bros.helpers
+    # List of bros available
+    bros: ->
       Bros.find( Session.get 'id' ).fetch().concat(
         Bros.find(
           { _id: { $ne: Session.get 'id' } },
@@ -78,17 +80,18 @@ do ->
         ).fetch()
       )
 
-  # Current user ID
-  Template.bros.user = ->
-    Session.get 'id'
+    # Current user ID
+    user: ->
+      Session.get 'id'
 
-  Template.bro.controlled = ->
-    Session.get( 'id' ) is @_id
+  Template.bro.helpers
+    controlled: ->
+      Session.get( 'id' ) is @_id
 
-  Template.bro.meals = ->
-    Menu.find().map ( meal ) ->
-      "\"#{ meal.title.toLowerCase() }\""
-    .join ','
+    meals: ->
+      Menu.find().map ( meal ) ->
+        "\"#{ meal.title.toLowerCase() }\""
+      .join ','
 
   Template.bro.events
     'submit form': ( e, template ) ->
@@ -130,25 +133,27 @@ do ->
 
       return false
 
-  Template.addForm.id = ->
-    Session.get 'id'
+  Template.addForm.helpers
+    id: ->
+      Session.get 'id'
 
   Template.removeModal.events
     'click #cross': ->
       removeBro Session.get 'id'
 
-  Template.ordersLog.humanize = ( date ) ->
-    moment( date, dateFormat ).fromNow()
+  Template.ordersLog.helpers
+    humanize: ( date ) ->
+      moment( date, dateFormat ).fromNow()
 
-  Template.ordersLog.orders = ->
-    id   = Session.get 'id'
-    logs = []
+    orders: ->
+      id   = Session.get 'id'
+      logs = []
 
-    Bros.find( id ).forEach ( bro ) ->
-      logs = bro.log?.sort ( a, b ) ->
-        moment( b.date, dateFormat ).unix() - moment( a.date, dateFormat ).unix()
+      Bros.find( id ).forEach ( bro ) ->
+        logs = bro.log?.sort ( a, b ) ->
+          moment( b.date, dateFormat ).unix() - moment( a.date, dateFormat ).unix()
 
-    return logs
+      return logs
 
   Template.ordersLog.events
     'click tr': ->

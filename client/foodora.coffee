@@ -33,7 +33,6 @@ do ->
     setControlledID id
 
   setControlledID = ( id ) ->
-    localStorage.setItem 'ids', id
     Session.set 'id', id
 
   setTyping = ( typing ) ->

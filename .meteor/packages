@@ -7,6 +7,5 @@ bootstrap
 coffeescript
 less
 backbone
-insecure
 accounts-google
 accounts-ui

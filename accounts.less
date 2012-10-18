@@ -1,3 +1,5 @@
+@green: desaturate( lighten( #390, 60% ), 50% );
+
 #login-buttons,
 .accounts-dialog {
   position: relative;
@@ -18,4 +20,28 @@
       background: none;
     }
   }
+}
+
+#ownerless-list {
+  tr {
+    cursor: pointer;
+    &:hover {
+      background: #f5f5f5;
+    }
+    &.ownerless-selected {
+      background: @green;
+      &:hover {
+        background: lighten( @green, 5% );
+      }
+    }
+  }
+}
+
+#new-user-name {
+  width: 520px;
+}
+
+.ownerless-tick {
+  margin-right: 4px;
+  color: darken( @green, 50% );
 }

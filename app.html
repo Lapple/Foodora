@@ -4,7 +4,6 @@
       {{> bros}}
     </div>
     {{> ordersLog}}
-    {{> removeModal}}
   {{/if}}
   {{#if isMenuPage}}
     <div class="container">
@@ -20,6 +19,9 @@
         <a href="/">списку заказов</a>.
       </p>
     </div>
+  {{/if}}
+  {{#if currentUser}}
+    {{> helloUser}}
   {{/if}}
 </template>
 

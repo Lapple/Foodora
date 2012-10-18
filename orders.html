@@ -19,7 +19,9 @@
   {{else}}
     <p class="nonexistent">Добавь себя пока других братанов нет!</p>
   {{/if}}
-  {{> addForm}}
+  {{#if currentUser}}
+    {{> ordersLogButton}}
+  {{/if}}
 </template>
 
 <template name="bro">
@@ -65,28 +67,12 @@
   </tr>
 </template>
 
-<template name="addForm">
+<template name="ordersLogButton">
   <div class="form-actions">
-    {{#if id}}
       <button type="button" class="btn" data-toggle="modal" href="#orders-log">
         <i class="icon icon-th-list"></i>
         История заказов
       </button>
-      <div class="pull-right">
-        <button type="button" class="btn btn-danger" href="#remove-modal" data-toggle="modal">
-          <i class="icon icon-trash icon-white"></i>
-          Удалить себя
-        </button>
-      </div>
-    {{else}}
-      <form class="form-inline" id="add-form">
-        <input type="text" class="input-large span3" id="new-name" placeholder="Твое братанское имя">
-        <button type="submit" class="btn btn-primary">
-          <i class="icon icon-plus icon-white"></i>
-          Добавить себя
-        </button>
-      </form>
-    {{/if}}
   </div>
 </template>
 
@@ -114,29 +100,6 @@
       {{else}}
         <p class="nonexistent">У вас истории пока нет.</p>
       {{/if}}
-    </div>
-  </div>
-</template>
-
-<template name="removeModal">
-  <div class="modal hide" id="remove-modal">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal">×</button>
-      <h3>Удаление братана</h3>
-    </div>
-    <div class="modal-body">
-      <div class="alert alert-danger">Это действие невозможно обратить, вы разом удалите всю историю своих заказов и не оставите даже самого малейшего упоминания о своем участии в&nbsp;благородных заказах пищи.</div>
-      <p>Вы все еще хотите удалить себя из списка?</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn" data-dismiss="modal">
-        <i class="icon icon-random"></i>
-        Нет, я хотел нажать на «История заказов»
-      </button>
-      <button type="button" class="btn btn-danger" id="cross" data-dismiss="modal">
-        <i class="icon icon-trash icon-white"></i>
-        Да, хочу
-      </button>
     </div>
   </div>
 </template>

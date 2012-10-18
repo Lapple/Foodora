@@ -1,0 +1,40 @@
+<template name="helloUser">
+  {{#unless hasBro}}
+    <div class="modal in" id="hello-user">
+      <div class="modal-header">
+        <h3>Представься, брат</h3>
+      </div>
+      <div class="modal-body">
+        {{#if ownerless.length}}
+          <p class="muted">Выбери себя из уже существующих братанов:</p>
+          <table class="table table-condensed table-bordered" id="ownerless-list">
+            <tbody>
+              {{#each ownerless}}
+              <tr{{#if selected}} class="ownerless-selected"{{/if}}>
+                <td>
+                  {{#if selected}}
+                    <div class="pull-right ownerless-tick">✔</div>
+                  {{/if}}
+                  {{name}}
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        {{/if}}
+        {{#unless selectedBro}}
+        <p class="muted">
+          {{#if ownerless.length}}Или введи{{else}}Введи{{/if}} свое достойное имя:
+        </p>
+        <input type="text" name="user[name]" id="new-user-name" value="{{ currentUser.profile.name }}"/>
+        {{/unless}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="user-add" class="btn btn-success">
+          Я готов заказать
+        </button>
+      </div>
+    </div>
+    <div class="modal-backdrop in" id="hello-user-backdrop"></div>
+  {{/unless}}
+</template>

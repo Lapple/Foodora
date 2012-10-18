@@ -13,6 +13,9 @@ Meteor.methods
 
     return id
 
+  bindBro: ( id ) ->
+    Bros.update( id, { $set: { owner: Meteor.userId() } } )
+
   setOrder: ( meal ) ->
     Bros.update { owner: Meteor.userId() }, {
       $set: {

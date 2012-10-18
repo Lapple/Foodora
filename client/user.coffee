@@ -23,7 +23,7 @@ Template.helloUser.events
     name = template.find( '#new-user-name' )?.value
 
     if id
-      Bros.update( id, { $set: { owner: Meteor.userId() } } )
+      Meteor.call 'bindBro', id
 
     if name
       Meteor.call 'createBro', name, ( err, id ) ->

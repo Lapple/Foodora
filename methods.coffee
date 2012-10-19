@@ -8,16 +8,16 @@ Meteor.methods
       typing      : false
       missingFood : false
       log         : []
-      owner       : Meteor.userId()
+      owner       : @userId
       last        : getToday()
 
     return id
 
   bindBro: ( id ) ->
-    Bros.update( id, { $set: { owner: Meteor.userId() } } )
+    Bros.update( id, { $set: { owner: @userId } } )
 
   setOrder: ( meal ) ->
-    Bros.update { owner: Meteor.userId() }, {
+    Bros.update { owner: @userId }, {
       $set: {
         ordered : meal.length > 0
         meal    : meal
@@ -27,14 +27,14 @@ Meteor.methods
     }
 
   setTyping: ( typing ) ->
-    Bros.update { owner: Meteor.userId() }, {
+    Bros.update { owner: @userId }, {
       $set: {
         typing: typing
       }
     }
 
   toggleEating: ( missing ) ->
-    Bros.update { owner: Meteor.userId() }, {
+    Bros.update { owner: @userId }, {
       $set: {
         missingFood : missing
         last        : getToday()

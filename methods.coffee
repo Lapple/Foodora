@@ -40,3 +40,6 @@ Meteor.methods
         last        : getToday()
       }
     }
+
+  wipeBro: ( id ) ->
+    Bros.remove id

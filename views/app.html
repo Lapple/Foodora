@@ -33,6 +33,14 @@
       <div class="container">
         <a class="brand">Foodora</a>
         <ul class="nav pull-right">
+          {{#if currentUser}}
+          <li>
+            <a data-toggle="modal" href="#orders-log">
+              История заказов
+            </a>
+          </li>
+          <li class="divider-vertical"></li>
+          {{/if}}
           <li>
             {{loginButtons}}
           </li>

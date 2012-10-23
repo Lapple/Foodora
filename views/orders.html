@@ -25,9 +25,6 @@
       {{/if}}
     </p>
   {{/if}}
-  {{#if currentUser}}
-    {{> ordersLogButton}}
-  {{/if}}
 </template>
 
 <template name="bro">
@@ -71,15 +68,6 @@
       {{/if}}
     </td>
   </tr>
-</template>
-
-<template name="ordersLogButton">
-  <div class="form-actions">
-      <button type="button" class="btn" data-toggle="modal" href="#orders-log">
-        <i class="icon icon-th-list"></i>
-        История заказов
-      </button>
-  </div>
 </template>
 
 <template name="ordersLog">

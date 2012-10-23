@@ -1,4 +1,5 @@
-Meteor.subscribe 'bros'
+Meteor.subscribe 'bros', ->
+  Session.set 'brosLoaded', true
 
 $el = ( id ) ->
   document.getElementById id
@@ -18,6 +19,9 @@ do ->
 
     isNotFound: ->
       Session.equals 'currentPage', '404'
+
+    loaded: ->
+      Session.get 'brosLoaded'
 
   Template.bros.helpers
     # List of bros available
@@ -43,6 +47,9 @@ do ->
       Menu.find().map ( meal ) ->
         "\"#{ meal.title.toLowerCase() }\""
       .join ','
+
+    loaded: ->
+      Session.get 'brosLoaded'
 
   Template.bro.events
     'submit form': ( e, template ) ->

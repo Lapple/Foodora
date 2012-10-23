@@ -20,8 +20,10 @@
       </p>
     </div>
   {{/if}}
-  {{#if currentUser}}
-    {{> helloUser}}
+  {{#if loaded}}
+    {{#if currentUser}}
+      {{> helloUser}}
+    {{/if}}
   {{/if}}
 </template>
 

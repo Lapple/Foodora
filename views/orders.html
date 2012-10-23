@@ -17,7 +17,13 @@
       </tbody>
     </table>
   {{else}}
-    <p class="nonexistent">Добавь себя пока других братанов нет!</p>
+    <p class="nonexistent">
+      {{#if loaded}}
+        Добавь себя пока других братанов нет!
+      {{else}}
+        Идет медленная загрузка длинного списка заказов…
+      {{/if}}
+    </p>
   {{/if}}
   {{#if currentUser}}
     {{> ordersLogButton}}

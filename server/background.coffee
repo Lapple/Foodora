@@ -24,4 +24,4 @@ Meteor.methods
 
 Meteor.startup ->
   # Logging previous entries every single day
-  Cron.instance.addJob 60, logOrders
+  Cron.instance.addJob 1, logOrders

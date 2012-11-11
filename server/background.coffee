@@ -22,6 +22,8 @@ logOrders = ->
 Meteor.methods
   cleanUp: logOrders
 
+###
 Meteor.startup ->
   # Logging previous entries every single day
   Cron.instance.addJob 1, logOrders
+###

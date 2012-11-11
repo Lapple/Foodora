@@ -4,9 +4,7 @@ do ->
   addMeal = ( title ) ->
     return if title.length is 0
 
-    Menu.insert
-      title   : title
-      updated : getToday()
+    Meteor.call 'insertMeal', title
 
   Template.meals.helpers
     meals: ->

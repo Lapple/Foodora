@@ -41,5 +41,12 @@ Meteor.methods
       }
     }
 
+  insertMeal: ( title ) ->
+    Menu.insert
+      title   : title
+      updated : getToday()
+
+  ###
   wipeBro: ( id ) ->
     Bros.remove id
+  ###

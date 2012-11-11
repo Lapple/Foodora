@@ -1,6 +1,17 @@
 Meteor.subscribe 'bros', ->
   Session.set 'brosLoaded', true
 
+Template.app.helpers
+  loaded: ->
+    Session.get 'brosLoaded'
+
+Template.header.helpers
+  loaded: ->
+    Session.get 'brosLoaded'
+
+  showOrdersButton: ->
+    Meteor.user() and Session.equals 'currentPage', 'home'
+
 $el = ( id ) ->
   document.getElementById id
 
@@ -8,20 +19,6 @@ do ->
   formatOrder = ( order ) ->
     return order if order.length is 0
     return order.replace /^(.*),\s*$/g, '$1'
-
-  # Basic routing
-  Template.app.helpers
-    isHomePage: ->
-      Session.equals 'currentPage', 'home'
-
-    isMenuPage: ->
-      Session.equals 'currentPage', 'menu'
-
-    isNotFound: ->
-      Session.equals 'currentPage', '404'
-
-    loaded: ->
-      Session.get 'brosLoaded'
 
   Template.bros.helpers
     # List of bros available
@@ -75,10 +72,6 @@ do ->
         Meteor.call 'toggleEating', $( '#no-food' ).hasClass 'active'
       , 0
 
-  Template.bro.preserve
-    'input[id]': (node) ->
-      node.id
-
   Template.ordersLog.helpers
     humanize: ( date ) ->
       moment( date, dateFormat ).fromNow()
@@ -97,23 +90,5 @@ do ->
       $el( 'my-order' ).value = @meal
       Meteor.call 'setOrder', @meal
 
-  # Routing
-  Router = Backbone.Router.extend
-    routes:
-      ''     : 'home'
-      'menu' : 'menu'
-      '*404' : 'notFound'
-
-    home: ->
-      Session.set 'currentPage', 'home'
-
-    menu: ->
-      Session.set 'currentPage', 'menu'
-
-    notFound: ->
-      Session.set 'currentPage', '404'
-
-  app = new Router
-
   Meteor.startup ->
-    Backbone.history.start( pushState: true )
+    Meteor.call 'cleanUp'

@@ -31,9 +31,12 @@
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
-        <a class="brand">Foodora</a>
+        <a class="brand" href="/">Foodora</a>
+        {{#unless loaded}}
+        <img src="loader.gif" id="spinner" />
+        {{/unless}}
         <ul class="nav pull-right">
-          {{#if currentUser}}
+          {{#if showOrdersButton}}
           <li>
             <a data-toggle="modal" href="#orders-log">
               История заказов

@@ -17,7 +17,6 @@ body {
     color: lighten( @gray, 15% );
     text-transform: uppercase;
     letter-spacing: 2px;
-    cursor: default;
     -webkit-transition: 0.2s;
     -moz-transition: 0.2s;
     -o-transition: 0.2s;
@@ -182,6 +181,12 @@ body {
 
 .modal-backdrop {
   background: @white;
+}
+
+#spinner {
+  position: relative;
+  top: 5px;
+  left: -12px;
 }
 
 @media (max-width: 979px) {

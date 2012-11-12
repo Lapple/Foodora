@@ -1,10 +1,6 @@
 Meteor.subscribe 'bros', ->
   Session.set 'brosLoaded', true
 
-Template.app.helpers
-  loaded: ->
-    Session.get 'brosLoaded'
-
 Template.header.helpers
   loaded: ->
     Session.get 'brosLoaded'

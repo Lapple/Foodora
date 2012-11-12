@@ -8,6 +8,9 @@ Template.app.helpers
   isNotFound: ->
     Session.equals 'currentPage', '404'
 
+  loaded: ->
+    Session.get 'brosLoaded'
+
 do ->
   Router = Backbone.Router.extend
     routes:

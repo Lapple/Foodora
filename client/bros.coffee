@@ -1,13 +1,6 @@
 Meteor.subscribe 'bros', ->
   Session.set 'brosLoaded', true
 
-Template.header.helpers
-  loaded: ->
-    Session.get 'brosLoaded'
-
-  showOrdersButton: ->
-    Meteor.user() and Session.equals 'currentPage', 'home'
-
 $el = ( id ) ->
   document.getElementById id
 
@@ -61,30 +54,17 @@ do ->
         order = formatOrder e.target.value
         Meteor.call 'setOrder', order
         e.target.value = order
+        _gaq.push ['_trackEvent', 'OrderForm', 'TypedIn']
       , 100
 
     'click #no-food': ->
       Meteor.setTimeout ->
-        Meteor.call 'toggleEating', $( '#no-food' ).hasClass 'active'
+        noFood = $( '#no-food' ).hasClass 'active'
+        Meteor.call 'toggleEating', noFood
+
+        if noFood
+          _gaq.push ['_trackEvent', 'OrderForm', 'Cancelled']
       , 0
-
-  Template.ordersLog.helpers
-    humanize: ( date ) ->
-      moment( date, dateFormat ).fromNow()
-
-    orders: ->
-      logs = []
-
-      Bros.find( { owner: Meteor.userId() } ).forEach ( bro ) ->
-        logs = bro.log?.sort ( a, b ) ->
-          moment( b.date, dateFormat ).unix() - moment( a.date, dateFormat ).unix()
-
-      return logs
-
-  Template.ordersLog.events
-    'click tr': ->
-      $el( 'my-order' ).value = @meal
-      Meteor.call 'setOrder', @meal
 
   Meteor.startup ->
     Meteor.call 'cleanUp'

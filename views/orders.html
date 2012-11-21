@@ -46,7 +46,7 @@
     <td>
       {{#if controlled}}
         <form action="#" method="post">
-          <div class="row">
+          <div class="row-fluid">
             <div class="span10">
               <input type="search" placeholder="Нет заказа" id="my-order" value="{{meal}}" data-provide="typeahead" data-source='[{{meals}}]' data-mode="multiple" class="span10" {{#if missingFood}} disabled{{/if}} />
             </div>

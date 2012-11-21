@@ -14,9 +14,8 @@ do ->
     bros: ->
       sort =
         sort:
+          missingFood: 1
           ordered: -1
-          missingFood: -1
-          name: 1
 
       if Meteor.userId()
         Bros.find( { owner: Meteor.userId() } ).fetch().concat(

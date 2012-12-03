@@ -5,6 +5,9 @@ Template.app.helpers
   isMenuPage: ->
     Session.equals 'currentPage', 'menu'
 
+  isBroPage: ->
+    Session.equals 'currentPage', 'bro'
+
   isNotFound: ->
     Session.equals 'currentPage', '404'
 
@@ -14,15 +17,20 @@ Template.app.helpers
 do ->
   Router = Backbone.Router.extend
     routes:
-      ''     : 'home'
-      'menu' : 'menu'
-      '*404' : 'notFound'
+      ''        : 'home'
+      'menu'    : 'menu'
+      'bro/:id' : 'bro'
+      '*404'    : 'notFound'
 
     home: ->
       Session.set 'currentPage', 'home'
 
     menu: ->
       Session.set 'currentPage', 'menu'
+
+    bro: ( id ) ->
+      Session.set 'currentPage', 'bro'
+      Session.set 'broId', id
 
     notFound: ->
       Session.set 'currentPage', '404'

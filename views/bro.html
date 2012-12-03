@@ -1,0 +1,13 @@
+<template name="broInfo">
+  <ul class="breadcrumb">
+    <li class="pull-right active">
+      {{#if ordersCount}}
+        Всего заказов: {{ordersCount}}
+      {{else}}
+        Ни разу не заказывал
+      {{/if}}
+    </li>
+    <li><a href="/">Все братаны</a> <span class="divider">/</span></li>
+    <li class="active">{{bro.name}}</li>
+  </ul>
+</template>

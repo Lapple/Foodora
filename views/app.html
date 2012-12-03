@@ -11,6 +11,11 @@
       {{> addMenu}}
     </div>
   {{/if}}
+  {{#if isBroPage}}
+    <div class="container">
+      {{> broInfo}}
+    </div>
+  {{/if}}
   {{#if isNotFound}}
     <div class="container">
       <p class="nonexistent">

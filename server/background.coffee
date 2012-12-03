@@ -3,8 +3,9 @@ logOrder = ( bro ) ->
     Bros.update( bro._id,
       $push:
         log:
-          date: bro.last
-          meal: bro.meal
+          date      : bro.last
+          meal      : bro.meal
+          timestamp : bro.timestamp
     )
 
   Bros.update( bro._id,

@@ -19,10 +19,11 @@ Meteor.methods
   setOrder: ( meal ) ->
     Bros.update { owner: @userId }, {
       $set: {
-        ordered : meal.length > 0
-        meal    : meal
-        last    : getToday()
-        typing  : false
+        ordered   : meal.length > 0
+        meal      : meal
+        last      : getToday()
+        timestamp : ( new Date ).getTime()
+        typing    : false
       }
     }
 

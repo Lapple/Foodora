@@ -47,7 +47,5 @@ Meteor.methods
       title   : title
       updated : getToday()
 
-  ###
   wipeBro: ( id ) ->
     Bros.remove id
-  ###
